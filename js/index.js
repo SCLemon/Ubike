@@ -16,11 +16,13 @@ window.onload=function(){
                 })
                 .then(function(resp){
                     if(resp.length>1) vm.list=resp;
-                    else vm.update();
+                    else {
+                        vm.update();
+                        setInterval(function(){
+                            vm.update();
+                        },10000);
+                    }
                 });
-                setInterval(function(){
-                    vm.update();
-                },10000);
             },
             update(){
                 var config={
