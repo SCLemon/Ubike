@@ -1,7 +1,7 @@
 const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('All');
 const NTHU = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('NTHU');
 function doGet(){
-  var output = JSON.stringify(updateNTHU());
+  var output = JSON.stringify(updateNTHU("GET"));
   return ContentService.createTextOutput(output).setMimeType(ContentService.MimeType.JSON);
 }
 function initialInsert(){
@@ -19,7 +19,7 @@ function initialInsert(){
 function getIndex(){
   return NTHU.getRange(1,1,NTHU.getLastRow(),1).getValues();
 }
-function updateNTHU(){
+function updateNTHU(method){
   var index = getIndex();
   clearAllData();
   var data =queryData();
@@ -28,8 +28,8 @@ function updateNTHU(){
     newData.push(data[index[i][0]])
     NTHU.appendRow([index[i][0],data[index[i][0]]['name_tw'],data[index[i][0]]['empty_spaces'],data[index[i][0]]['available_spaces']]);
   }
-  sendMessage();
-  return newData;
+  if(method=="GET") return newData;
+  else sendMessage();
 }
 function queryData() {
   clearAllData();
@@ -49,7 +49,7 @@ function sendMessage(){
     content+='<tr><td>'+data[i][1]+'</td><td>'+data[i][2]+'</td><td>'+data[i][3]+'</td></tr>';
   }
   content+='</table>';
-  MailApp.sendEmail("blc0000421@gmail.com","UBIKE NTHU即時資訊","",{
+  MailApp.sendEmail("your email","UBIKE NTHU即時資訊","",{
     noReply:true,
     htmlBody:content
   })
