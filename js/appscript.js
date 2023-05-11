@@ -48,7 +48,7 @@ function sendMessage(){
     content+='<tr><td>'+data[i][1]+'</td><td>'+data[i][2]+'</td><td>'+data[i][3]+'</td></tr>';
   }
   content+='</table>';
-  MailApp.sendEmail("blc0000421@gmail.com","UBIKE NTHU即時資訊","",{
+  MailApp.sendEmail("","UBIKE NTHU即時資訊","",{
     noReply:true,
     htmlBody:content
   })
