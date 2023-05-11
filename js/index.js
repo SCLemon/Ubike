@@ -17,6 +17,15 @@ window.onload=function(){
                 .then(function(resp){
                     vm.list=resp;
                 });
+                setInterval(function(){
+                    fetch('https://script.google.com/macros/s/AKfycbwRHDR3lYNevH4uuRUFenjYj4OHDbXAJ1k-KutGDBGkSknlSEJ7Fg8VxbPEf70lEQt6fA/exec',config)
+                    .then(function(resp){
+                    return resp.json();
+                    })
+                    .then(function(resp){
+                        vm.list=resp;
+                    });
+                },15000);
             }
         }
     });
