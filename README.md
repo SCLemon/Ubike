@@ -9,5 +9,5 @@ You can get data from this API: https://script.google.com/macros/s/AKfycbwRHDR3l
 Importantly, the crawler source is supported by Cheerio which Script ID is "1ReeQ6WO8kKNxoaA_O0XEQ589cIrRvEBA9qcWpNqdOP17i47u6N9M5Xh0". <br>
 And the API from UBike is "https://apis.youbike.com.tw/json/station-yb2.json"<br>
 <hr>
-sample:<a href='https://sclemon.github.io/Ubike/' target="_blank">點擊連結</a>
+sample: <a href='https://sclemon.github.io/Ubike/' target="_blank">touch link</a>
 
