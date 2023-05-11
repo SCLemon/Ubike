@@ -16,12 +16,10 @@ window.onload=function(){
                 })
                 .then(function(resp){
                     if(resp.length>1) vm.list=resp;
-                    else {
+                    else vm.update();
+                    setInterval(function(){
                         vm.update();
-                        setInterval(function(){
-                            vm.update();
-                        },10000);
-                    }
+                    },10000);
                 });
             },
             update(){
