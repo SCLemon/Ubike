@@ -15,17 +15,25 @@ window.onload=function(){
                     return resp.json();
                 })
                 .then(function(resp){
-                    vm.list=resp;
+                    if(resp.length>1) vm.list=resp;
+                    else vm.update();
                 });
                 setInterval(function(){
-                    fetch('https://script.google.com/macros/s/AKfycbwRHDR3lYNevH4uuRUFenjYj4OHDbXAJ1k-KutGDBGkSknlSEJ7Fg8VxbPEf70lEQt6fA/exec',config)
-                    .then(function(resp){
+                    vm.update();
+                },10000);
+            },
+            update(){
+                var config={
+                    method:"GET",
+                    redirect:"follow"
+                }
+                fetch('https://script.google.com/macros/s/AKfycbwRHDR3lYNevH4uuRUFenjYj4OHDbXAJ1k-KutGDBGkSknlSEJ7Fg8VxbPEf70lEQt6fA/exec',config)
+                .then(function(resp){
                     return resp.json();
-                    })
-                    .then(function(resp){
-                        vm.list=resp;
-                    });
-                },15000);
+                })
+                .then(function(resp){
+                    if(resp.length>1) vm.list=resp;
+                });
             }
         }
     });
