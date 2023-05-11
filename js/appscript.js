@@ -1,12 +1,13 @@
 const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('All');
 const NTHU = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('NTHU');
 function doGet(){
-  var output = JSON.stringify(updateNTHU("GET"));
+  var data =NTHU.getDataRange().getValues();
+  var output = JSON.stringify(data);
   return ContentService.createTextOutput(output).setMimeType(ContentService.MimeType.JSON);
 }
 function initialInsert(){
   var data = queryData();
-  for(var i=0;i<data.length;i++){
+  for(var i=1000;i<data.length;i++){
     var name=data[i]['name_tw'];
     if(name.indexOf('清華大學')!=-1 ||name.indexOf('十八尖山')!=-1){
       NTHU.appendRow([i,data[i]['name_tw'],data[i]['empty_spaces'],data[i]['available_spaces']]);
@@ -28,8 +29,6 @@ function updateNTHU(method){
     newData.push(data[index[i][0]])
     NTHU.appendRow([index[i][0],data[index[i][0]]['name_tw'],data[index[i][0]]['empty_spaces'],data[index[i][0]]['available_spaces']]);
   }
-  if(method=="GET") return newData;
-  else sendMessage();
 }
 function queryData() {
   clearAllData();
@@ -49,7 +48,7 @@ function sendMessage(){
     content+='<tr><td>'+data[i][1]+'</td><td>'+data[i][2]+'</td><td>'+data[i][3]+'</td></tr>';
   }
   content+='</table>';
-  MailApp.sendEmail("your email","UBIKE NTHU即時資訊","",{
+  MailApp.sendEmail("blc0000421@gmail.com","UBIKE NTHU即時資訊","",{
     noReply:true,
     htmlBody:content
   })
