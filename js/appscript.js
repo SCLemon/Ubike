@@ -70,14 +70,31 @@ function clearAllData(){
 
 // send
 function sendMessage(){
-  var content='<table style="border: 1px sold gray; width: 350px; text-align: center" rules="all"><tr><td colspan="3">清華大學</td></tr><tr><td>地點</td><td>空位</td><td>可借</td></tr>';
+  var content='<table style="border: 1px sold gray; width: 350px; text-align: center" rules="all"><tr><td colspan="3">清華大學</td></tr><tr><td colspan="3">'+new Date()+'</td></tr><tr><td>地點</td><td>空位</td><td>可借</td></tr>';
   var data = NTHU.getDataRange().getValues();
   for(var i=0;i<data.length;i++){
     content+='<tr><td>'+data[i][1]+'</td><td>'+data[i][2]+'</td><td>'+data[i][3]+'</td></tr>';
   }
   content+='</table>';
-  MailApp.sendEmail("","UBIKE NTHU即時資訊","",{
+  MailApp.sendEmail("your email","UBIKE NTHU即時資訊","",{
     noReply:true,
     htmlBody:content
   })
+}
+
+function sendToUBIKE(){
+  var flag=0;
+  var content='<table style="border: 1px sold gray; width: 350px; text-align: center" rules="all"><tr><td colspan="3">清華大學</td></tr><tr><td colspan="3">'+new Date()+'</td></tr><tr><td>地點</td><td>空位</td><td>可借</td></tr>';
+  var data = NTHU.getDataRange().getValues();
+  for(var i=0;i<data.length;i++){
+    content+='<tr><td>'+data[i][1]+'</td><td>'+data[i][2]+'</td><td>'+data[i][3]+'</td></tr>';
+    if(data[i][3]==0) flag++;
+  }
+  content+='</table>';
+  if(flag){
+    MailApp.sendEmail("service-hccg@youbike.com.tw","UBIKE NTHU 請即時補充車輛(狀態如下)","",{
+        noReply:true,
+        htmlBody:content
+    })
+  }
 }
