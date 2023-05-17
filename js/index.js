@@ -19,7 +19,7 @@ window.onload=function(){
                     else vm.update();
                     setInterval(function(){
                         vm.update();
-                    },10000);
+                    },5000);
                 });
             },
             update(){
