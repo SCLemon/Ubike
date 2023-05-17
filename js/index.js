@@ -15,7 +15,7 @@ window.onload=function(){
                     return resp.json();
                 })
                 .then(function(resp){
-                    if(resp.length>1) vm.list=resp;
+                    if(resp.length>4) vm.list=resp;
                     else vm.update();
                     setInterval(function(){
                         vm.update();
@@ -32,7 +32,7 @@ window.onload=function(){
                     return resp.json();
                 })
                 .then(function(resp){
-                    if(resp.length>1) vm.list=resp;
+                    if(resp.length>4) vm.list=resp;
                 });
             }
         }
